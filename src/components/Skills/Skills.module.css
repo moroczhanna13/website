@@ -1,0 +1,111 @@
+.section {
+  padding-block: clamp(4rem, 10vw, 7rem);
+  background: var(--bg-alt);
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* páratlan számú kártyánál az utolsó kitölti a sort */
+  .grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1040px) {
+  .grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .grid > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+.group {
+  --suit-color: var(--suit-black);
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 1.4rem 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card-face);
+  box-shadow: var(--shadow);
+  /* keeps the scroll-reveal timing from global.css, adds the hover border */
+  transition:
+    border-color 300ms ease,
+    opacity 700ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 700ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.group[data-suit='red'] {
+  --suit-color: var(--suit-red);
+}
+
+.group:hover {
+  border-color: var(--accent);
+}
+
+.corner {
+  display: block;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--suit-color);
+}
+
+.name {
+  margin: 0.75rem 0 1.1rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+}
+
+.tags {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags li {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+  transition:
+    background-color var(--dur) ease,
+    border-color var(--dur) ease,
+    color var(--dur) ease;
+}
+
+.tags li:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.bigSuit {
+  position: absolute;
+  right: -0.5rem;
+  bottom: -2.25rem;
+  font-size: 8rem;
+  line-height: 1;
+  color: var(--suit-color);
+  opacity: 0.07;
+  pointer-events: none;
+  transition: transform 600ms var(--ease-out);
+}
+
+.group:hover .bigSuit {
+  transform: rotate(-12deg) scale(1.08);
+}

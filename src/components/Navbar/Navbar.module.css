@@ -1,0 +1,229 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    backdrop-filter 300ms ease;
+}
+
+.header[data-scrolled='true'] {
+  background: var(--nav-bg);
+  border-bottom-color: var(--border);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: var(--nav-height);
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--accent-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  padding: 4px 2px;
+}
+
+.logo:hover {
+  color: var(--accent);
+}
+
+/* ---------- Mobile (default): slide-down panel ---------- */
+
+.menu {
+  position: fixed;
+  inset: var(--nav-height) 0 auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem var(--gutter) 2rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  max-height: calc(100dvh - var(--nav-height));
+  overflow-y: auto;
+  /* visibility removes the closed menu from the tab order */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition:
+    opacity var(--dur) ease,
+    transform var(--dur) var(--ease-out),
+    visibility 0s linear var(--dur);
+}
+
+.menu[data-open='true'] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur) ease,
+    transform var(--dur) var(--ease-out),
+    visibility 0s;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.link {
+  display: block;
+  padding: 0.75rem 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.link:hover,
+.link[aria-current] {
+  color: var(--accent-text);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color var(--dur) ease,
+    color var(--dur) ease,
+    transform var(--dur) var(--ease-out);
+}
+
+.iconButton:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.iconButton svg {
+  transition: transform 400ms var(--ease-out);
+}
+
+.iconButton:hover svg {
+  transform: rotate(-15deg);
+}
+
+.langToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color var(--dur) ease;
+}
+
+.langToggle:hover {
+  border-color: var(--accent);
+}
+
+.langToggle [data-active='true'] {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.slash {
+  opacity: 0.6;
+}
+
+.burger {
+  display: inline-grid;
+}
+
+/* ---------- Desktop: inline menu ---------- */
+
+@media (min-width: 860px) {
+  .burger {
+    display: none;
+  }
+
+  .menu {
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 0;
+    max-height: none;
+    overflow: visible;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .links {
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+
+  .link {
+    position: relative;
+    padding: 0.5rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* Small heart marks the active section */
+  .link::before {
+    content: '♥';
+    position: absolute;
+    left: 50%;
+    bottom: -0.45rem;
+    font-size: 0.6rem;
+    color: var(--suit-red);
+    opacity: 0;
+    transform: translate(-50%, -4px) scale(0.6);
+    transition:
+      opacity var(--dur) ease,
+      transform var(--dur) var(--ease-out);
+  }
+
+  .link:hover,
+  .link[aria-current] {
+    color: var(--text);
+  }
+
+  .link[aria-current]::before {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}

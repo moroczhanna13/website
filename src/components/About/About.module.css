@@ -1,0 +1,145 @@
+.section {
+  padding-block: clamp(4rem, 10vw, 7rem);
+  background: var(--bg-alt);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(3rem, 6vw, 4.5rem);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(240px, 320px) 1fr;
+  }
+}
+
+.photo {
+  padding: 0.5rem 1.5rem 1.5rem 0;
+}
+
+.content {
+  display: grid;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.text {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 62ch;
+  font-size: 1.075rem;
+  color: var(--text);
+}
+
+/* ---------- Status panel ---------- */
+
+.panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.panelHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px dashed var(--border);
+  background: var(--surface-2);
+}
+
+.panelFile {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.panelFile::before {
+  content: '♠ ';
+  color: var(--suit-black);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: ping 1.8s var(--ease-out) infinite;
+}
+
+@keyframes ping {
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.list {
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+}
+
+.row {
+  display: grid;
+  gap: 0.15rem 1.5rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+@media (min-width: 560px) {
+  .row {
+    grid-template-columns: 11rem 1fr;
+    align-items: baseline;
+  }
+}
+
+.row dt {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.row dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot::after {
+    animation: none;
+  }
+}

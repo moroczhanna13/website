@@ -1,0 +1,41 @@
+.heading {
+  max-width: 640px;
+  margin-bottom: clamp(2rem, 5vw, 3.25rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  color: var(--accent-text);
+}
+
+.red,
+.black {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+.red {
+  color: var(--suit-red);
+}
+
+.black {
+  color: var(--suit-black);
+}
+
+.title {
+  font-size: clamp(2.1rem, 5vw, 3.25rem);
+  font-weight: 700;
+}
+
+.intro {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 1.075rem;
+}
